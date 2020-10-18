@@ -32,6 +32,13 @@ Create миграция:
 ```
 t.string :value, null: false, unique: true
 ```
+Модель:
+```
+class TelephoneNumber < ApplicationRecord
+    belongs_to :offer
+    belongs_to :img_url
+end
+```
 
 ## Hashtag [#]()
 Таблица хэштегов. Записи добавляются при парсе предложения с привязкой (связь многи ко многим).
@@ -45,6 +52,13 @@ rails generate model Hashtag value:string
 Create миграция:
 ```
 t.string :value, null: false, unique: true
+```
+Модель:
+```
+class Hashtag < ApplicationRecord
+    belongs_to :offer
+    belongs_to :img_url
+end
 ```
 
 ## Url [#]()
@@ -60,6 +74,13 @@ Create миграция:
 ```
 t.string :value, null: false, unique: true
 ```
+Модель:
+```
+class Url < ApplicationRecord
+    belongs_to :offer
+    belongs_to :img_url
+end
+```
 
 ## ImgUrl [#]()
 Таблица url-адресов изображений.   
@@ -74,6 +95,13 @@ Create миграция:
 ```
 t.string :value, null: false, unique: true
 ```
+Модель:
+```
+class ImgUrl < ApplicationRecord
+    belongs_to :offer
+    belongs_to :img_url
+end
+```
 
 ## ResourceType [#]()
 Таблица типов источника [“Группа ВК”, ...]
@@ -87,6 +115,13 @@ rails generate model ResourceType title:string
 Create миграция:
 ```
 t.string :title, null: false, unique: true
+```
+Модель:
+```
+class ResourceType < ApplicationRecord
+    belongs_to :offer
+    belongs_to :img_url
+end
 ```
 
 ## Country [#]()
@@ -103,10 +138,17 @@ Create миграция:
 t.references :country, null: false, foreign_key: true
 t.string :title, null: false
 ```
+Модель:
+```
+class Country < ApplicationRecord
+    belongs_to :offer
+    belongs_to :img_url
+end
+```
 
 ## City [#]()
 Таблица городов [“Красноярск”, ...]
-> - `country_id` <br> 
+> - `country` <br> 
 >   Ссылка на страну, в которой находится город
 > - `title` <br> 
 >   Хранит наименование города 
@@ -122,10 +164,19 @@ Create миграция:
 t.references :country, null: false, foreign_key: true
 t.string :title, null: false
 ```
+Модель:
+```
+class City < ApplicationRecord
+    belongs_to :country
+    has_many :addresses
+    has_many :resources
+    has_many :resources
+end
+```
 
 ## Address [#]()
 Таблица адресов
-> - `city_id` <br> 
+> - `city` <br> 
 >   Ссылка на город, которому принадлежит адрес
 > - `title` <br> 
 >   Хранит полную строку адреса
@@ -149,15 +200,24 @@ t.string :title, null: false
 t.decimal :latitude, precision: 15, scale: 6, null: false
 t.decimal :longitude, precision: 15, scale: 6, null: false
 ```
+Модель:
+```
+class Address < ApplicationRecord
+    belongs_to :city
+    has_many :offers
+end
+```
 
 ## Resource [#]()
 Таблица источников
-> - `resource_type_id` <br> 
+> - `resource_type` <br> 
 >   Ссылка на тип ресурса
-> - `url_id` <br> 
+> - `url` <br> 
 >   Ссылка на url-адрес
-> - `city_id` <br> 
+> - `city` <br> 
 >   Ссылка на город, для которого будут определяться найденные в этом источнике предложения
+> - `offers` <br> 
+>   Список предложений, закрепленных за этим источником
 
 Генерация модели:
 ```
@@ -171,6 +231,15 @@ Create миграция:
 t.references :resource_type, null: false, foreign_key: true
 t.references :url, null: false, foreign_key: true, unique: true
 t.references :city, null: false, foreign_key: true
+```
+Модель:
+```
+class Resource < ApplicationRecord
+    belongs_to :resource_type
+    belongs_to :url
+    belongs_to :city
+    has_many :offers
+end
 ```
 
 ## Offer [#]()
