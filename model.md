@@ -61,6 +61,20 @@ Create миграция:
 t.string :value, null: false, unique: true
 ```
 
+## ImgUrl [#]()
+Таблица url-адресов изображений.   
+> - `value` <br>
+>   Хранит значение url-адреса изображения
+
+Генерация модели:
+```
+rails generate model ImgUrl value:string
+```
+Create миграция:
+```
+t.string :value, null: false, unique: true
+```
+
 ## ResourceType [#]()
 Таблица типов источника [“Группа ВК”, ...]
 > - `title` <br> 
@@ -161,10 +175,18 @@ t.references :city, null: false, foreign_key: true
 
 ## Offer [#]()
 Таблица предложений 
-> - `resource_id` <br> 
+> - `resource` <br> 
 >   Ссылка на источник предложения
-> - `address_id` <br> 
+> - `address` <br> 
 >   Ссылка на адрес предложения
+> - `telephone_numbers` <br> 
+>   Список телефонных номеров
+> - `hashtags` <br> 
+>   Список хэштегов
+> - `urls` <br> 
+>   Список url-адресов
+> - `img_urls` <br> 
+>   Список изображений
 > - `price` <br> 
 >   Хранит цену предложения
 > - `square_meters` <br> 
@@ -180,11 +202,11 @@ t.references :city, null: false, foreign_key: true
 > - `is_realtor` <br> 
 >   Указывает на то является ли данное предложение предложением агенства 
 > - `rental_period` <br> 
->   Хранит период аренды `enum`: `:month`,`:day`
+>   Хранит период аренды `enum`: `:month`, `:day`
 > - `description` <br> 
 >   Хранит описание (*Полный текст из источника. Нужен только для дальнейшего анализа и парса*). Системное поле
 > - `sidekiq_status` <br> 
->   Хранит статус обработки `enum`: `:searcher`,`:parser`,`:completed`,`:error`. Системное поле 
+>   Хранит статус обработки `enum`: `:searcher`, `:parser`, `:completed`, `:error`. Системное поле 
 
 Генерация модели:
 ```
@@ -231,14 +253,17 @@ class Offer < ApplicationRecord
     
     has_many :offer_urls
     has_many :urls, through: :offer_urls
+    
+    has_many :offer_img_urls
+    has_many :img_urls, through: :offer_img_urls
 end
 ```
 
 ## OfferTelephoneNumber [#]()
 Таблица связей риелторских предложений и телефонных номеров
-> - `offer_id` <br> 
+> - `offer` <br> 
 >   Ссылка на риелторское предложение, к которому будет привязан номер
-> - `telephone_number_id` <br> 
+> - `telephone_number` <br> 
 >   Ссылка на номер телефона, который будет привязан к риелторскому предложению
 
 Генерация модели:
@@ -262,9 +287,9 @@ end
 
 ## OfferHashtag [#]()
 Таблица связей риелторских предложений и телефонных номеров
-> - `offer_id` <br> 
+> - `offer` <br> 
 >   Ссылка на риелторское предложение, к которому будет привязан номер
-> - `hashtag_id` <br> 
+> - `hashtag` <br> 
 >   Ссылка на номер телефона, который будет привязан к риелторскому предложению
 
 Генерация модели:
@@ -288,9 +313,9 @@ end
 
 ## OfferUrl [#]()
 Таблица связей риелторских предложений и телефонных номеров
-> - `offer_id` <br> 
+> - `offer` <br> 
 >   Ссылка на риелторское предложение, к которому будет привязан номер
-> - `url_id` <br> 
+> - `url` <br> 
 >   Ссылка на номер телефона, который будет привязан к риелторскому предложению
 
 Генерация модели:
@@ -314,26 +339,26 @@ end
 
 ## OfferImgUrl [#]()
 Таблица связей риелторских предложений и url-адрессов изображений
-> - `offer_id` <br> 
+> - `offer` <br> 
 >   Ссылка на риелторское предложение, к которому будет привязан номер
-> - `url_id` <br> 
+> - `img_url` <br> 
 >   Ссылка на номер телефона, который будет привязан к риелторскому предложению
 
 Генерация модели:
 ```
-rails generate model OfferUrl \
+rails generate model OfferImgUrl \
     offer:references:index \
-    url:references:index \
+    img_url:references:index \
 ```
 Create миграция:
 ```
 t.references :offer, null: false, foreign_key: true
-t.references :url, null: false, foreign_key: true
+t.references :img_url, null: false, foreign_key: true
 ```
 Модель:
 ```
-class OfferUrl < ApplicationRecord
+class OfferImgUrl < ApplicationRecord
     belongs_to :offer
-    belongs_to :url
+    belongs_to :img_url
 end
 ```
