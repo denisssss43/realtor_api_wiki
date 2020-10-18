@@ -20,7 +20,7 @@
 # MODEL
 Описание модели данных
 
-## TelephoneNumber [#](https://github.com/denisssss43/realtor_api_wiki/blob/master/model.md)
+## TelephoneNumber [#](https://github.com/denisssss43/realtor_api_wiki/blob/master/model.md#)
 Таблица номеров телефона. Записи добавляются при парсе предложения с привязкой (связь многи ко многим). Через количество предложений для одного номера будут определяться предложения от риелторских агенств.
 > - `value` <br> 
 >   Хранит значение номера телефона 
@@ -43,7 +43,7 @@ class TelephoneNumber < ApplicationRecord
 end
 ```
 
-## Hashtag [#](https://github.com/denisssss43/realtor_api_wiki/blob/master/model.md)
+## Hashtag [#](https://github.com/denisssss43/realtor_api_wiki/blob/master/model.md#)
 Таблица хэштегов. Записи добавляются при парсе предложения с привязкой (связь многи ко многим).
 > - `value` <br> 
 >   Хранит значение хэштега 
@@ -66,7 +66,7 @@ class Hashtag < ApplicationRecord
 end
 ```
 
-## Url [#](https://github.com/denisssss43/realtor_api_wiki/blob/master/model.md)
+## Url [#](https://github.com/denisssss43/realtor_api_wiki/blob/master/model.md#)
 Таблица url-адресов.   
 > - `value` <br>
 >   Хранит значение url-адреса 
@@ -89,7 +89,7 @@ class Url < ApplicationRecord
 end
 ```
 
-## ImgUrl [#](https://github.com/denisssss43/realtor_api_wiki/blob/master/model.md)
+## ImgUrl [#](https://github.com/denisssss43/realtor_api_wiki/blob/master/model.md#)
 Таблица url-адресов изображений.   
 > - `value` <br>
 >   Хранит значение url-адреса изображения
@@ -112,7 +112,7 @@ class ImgUrl < ApplicationRecord
 end
 ```
 
-## ResourceType [#](https://github.com/denisssss43/realtor_api_wiki/blob/master/model.md)
+## ResourceType [#](https://github.com/denisssss43/realtor_api_wiki/blob/master/model.md#)
 Таблица типов источника [“Группа ВК”, ...]
 > - `resources` <br> 
 >   Список источников, которые используют тип источника 
@@ -134,7 +134,7 @@ class ResourceType < ApplicationRecord
 end
 ```
 
-## Country [#](https://github.com/denisssss43/realtor_api_wiki/blob/master/model.md)
+## Country [#](https://github.com/denisssss43/realtor_api_wiki/blob/master/model.md#)
 Таблица стран [“Россия”, ...]
 > - `cities` <br> 
 >   Список городов, входящих в состав страны 
@@ -157,7 +157,7 @@ class Country < ApplicationRecord
 end
 ```
 
-## City [#](https://github.com/denisssss43/realtor_api_wiki/blob/master/model.md)
+## City [#](https://github.com/denisssss43/realtor_api_wiki/blob/master/model.md#)
 Таблица городов [“Красноярск”, ...]
 > - `country` <br> 
 >   Ссылка на страну, в которой находится город
@@ -188,7 +188,7 @@ class City < ApplicationRecord
 end
 ```
 
-## Address [#](https://github.com/denisssss43/realtor_api_wiki/blob/master/model.md)
+## Address [#](https://github.com/denisssss43/realtor_api_wiki/blob/master/model.md#)
 Таблица адресов
 > - `city` <br> 
 >   Ссылка на город, которому принадлежит адрес
@@ -224,7 +224,7 @@ class Address < ApplicationRecord
 end
 ```
 
-## Resource [#](https://github.com/denisssss43/realtor_api_wiki/blob/master/model.md)
+## Resource [#](https://github.com/denisssss43/realtor_api_wiki/blob/master/model.md#)
 Таблица источников
 > - `resource_type` <br> 
 >   Ссылка на тип ресурса
@@ -258,7 +258,7 @@ class Resource < ApplicationRecord
 end
 ```
 
-## Offer [#](https://github.com/denisssss43/realtor_api_wiki/blob/master/model.md)
+## Offer [#](https://github.com/denisssss43/realtor_api_wiki/blob/master/model.md#)
 Таблица предложений 
 > - `resource` <br> 
 >   Ссылка на источник предложения
@@ -344,7 +344,7 @@ class Offer < ApplicationRecord
 end
 ```
 
-## OfferTelephoneNumber [#](https://github.com/denisssss43/realtor_api_wiki/blob/master/model.md)
+## OfferTelephoneNumber [#](https://github.com/denisssss43/realtor_api_wiki/blob/master/model.md#)
 Таблица связей риелторских предложений и телефонных номеров
 > - `offer` <br> 
 >   Ссылка на риелторское предложение, к которому будет привязан номер
@@ -370,7 +370,7 @@ class OfferTelephoneNumber < ApplicationRecord
 end
 ```
 
-## OfferHashtag [#](https://github.com/denisssss43/realtor_api_wiki/blob/master/model.md)
+## OfferHashtag [#](https://github.com/denisssss43/realtor_api_wiki/blob/master/model.md#)
 Таблица связей риелторских предложений и хэштегов
 > - `offer` <br> 
 >   Ссылка на риелторское предложение, к которому будет привязан хэштег
@@ -396,7 +396,7 @@ class OfferHashtag < ApplicationRecord
 end
 ```
 
-## OfferUrl [#](https://github.com/denisssss43/realtor_api_wiki/blob/master/model.md)
+## OfferUrl [#](https://github.com/denisssss43/realtor_api_wiki/blob/master/model.md#)
 Таблица связей риелторских предложений и url-адресов
 > - `offer` <br> 
 >   Ссылка на риелторское предложение, к которому будет привязана ссылка
@@ -422,7 +422,7 @@ class OfferUrl < ApplicationRecord
 end
 ```
 
-## OfferImgUrl [#](https://github.com/denisssss43/realtor_api_wiki/blob/master/model.md)
+## OfferImgUrl [#](https://github.com/denisssss43/realtor_api_wiki/blob/master/model.md#)
 Таблица связей риелторских предложений и url-адрессов изображений
 > - `offer` <br> 
 >   Ссылка на риелторское предложение, к которому будет привязано изображение
