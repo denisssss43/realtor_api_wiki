@@ -119,8 +119,7 @@ t.string :title, null: false, unique: true
 Модель:
 ```
 class ResourceType < ApplicationRecord
-    belongs_to :offer
-    belongs_to :img_url
+    has_many :cities
 end
 ```
 
@@ -140,9 +139,8 @@ t.string :title, null: false
 ```
 Модель:
 ```
-class Country < ApplicationRecord
-    belongs_to :offer
-    belongs_to :img_url
+class Country < ApplicationRecord 
+    has_many :cities
 end
 ```
 
@@ -169,8 +167,7 @@ t.string :title, null: false
 class City < ApplicationRecord
     belongs_to :country
     has_many :addresses
-    has_many :resources
-    has_many :resources
+    has_many :resources 
 end
 ```
 
