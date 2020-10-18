@@ -10,6 +10,9 @@
     - [Addresse](https://github.com/denisssss43/realtor_api_wiki/blob/master/model.md#Addresse-)
     - [Resource](https://github.com/denisssss43/realtor_api_wiki/blob/master/model.md#Resource-)
     - [Offer](https://github.com/denisssss43/realtor_api_wiki/blob/master/model.md#Offer-)
+    - [OfferTelephoneNumber](https://github.com/denisssss43/realtor_api_wiki/blob/master/model.md#Offer-)
+    - [OfferHashtag](https://github.com/denisssss43/realtor_api_wiki/blob/master/model.md#Offer-)
+    - [OfferUrl](https://github.com/denisssss43/realtor_api_wiki/blob/master/model.md#Offer-)
 1. [Sidekiq](https://github.com/denisssss43/realtor_api_wiki/blob/master/sidekiq.md#sidekiq)
 
 
@@ -27,11 +30,7 @@ rails generate model TelephoneNumber value:string
 ```
 Create миграция:
 ```
-create_table :telephone_numbers do |t|
-    t.string :value, null: false, unique: true
-
-    t.timestamps
-end
+t.string :value, null: false, unique: true
 ```
 
 ## Hashtag [#]()
@@ -45,11 +44,7 @@ rails generate model Hashtag value:string
 ```
 Create миграция:
 ```
-create_table :hashtags do |t|
-    t.string :value, null: false, unique: true
-
-    t.timestamps
-end
+t.string :value, null: false, unique: true
 ```
 
 ## Url [#]()
@@ -63,11 +58,7 @@ rails generate model Url value:string
 ```
 Create миграция:
 ```
-create_table :urls do |t|
-    t.string :value, null: false, unique: true
-
-    t.timestamps
-end
+t.string :value, null: false, unique: true
 ```
 
 ## ResourceType [#]()
@@ -81,11 +72,7 @@ rails generate model ResourceType title:string
 ```
 Create миграция:
 ```
-create_table :resource_types do |t|
-    t.string :title, null: false, unique: true
-
-    t.timestamps
-end
+t.string :title, null: false, unique: true
 ```
 
 ## Country [#]()
@@ -99,12 +86,8 @@ rails generate model Country title:string
 ```
 Create миграция:
 ```
-create_table :cities do |t|
-    t.references :country, null: false, foreign_key: true
-    t.string :title, null: false
-
-    t.timestamps
-end
+t.references :country, null: false, foreign_key: true
+t.string :title, null: false
 ```
 
 ## City [#]()
@@ -122,12 +105,8 @@ rails generate model City \
 ```
 Create миграция:
 ```
-create_table :cities do |t|
-    t.references :country, null: false, foreign_key: true
-    t.string :title, null: false
-
-    t.timestamps
-end
+t.references :country, null: false, foreign_key: true
+t.string :title, null: false
 ```
 
 ## Address [#]()
@@ -151,16 +130,10 @@ rails generate model Address \
 ```
 Create миграция:
 ```
-create_table :addresses do |t|
-    t.references :city, null: false, foreign_key: true
-    
-    t.string :title, null: false
-
-    t.decimal :latitude, precision: 15, scale: 6, null: false
-    t.decimal :longitude, precision: 15, scale: 6, null: false
-
-    t.timestamps
-end
+t.references :city, null: false, foreign_key: true
+t.string :title, null: false
+t.decimal :latitude, precision: 15, scale: 6, null: false
+t.decimal :longitude, precision: 15, scale: 6, null: false
 ```
 
 ## Resource [#]()
@@ -181,13 +154,9 @@ rails generate model Resource \
 ```
 Create миграция:
 ```
-create_table :resources do |t|
-    t.references :resource_type, null: false, foreign_key: true
-    t.references :url, null: false, foreign_key: true, unique: true
-    t.references :city, null: false, foreign_key: true
-
-    t.timestamps
-end
+t.references :resource_type, null: false, foreign_key: true
+t.references :url, null: false, foreign_key: true, unique: true
+t.references :city, null: false, foreign_key: true
 ```
 
 ## Offer [#]()
@@ -235,23 +204,136 @@ rails generate model Offer \
 ```
 Create миграция:
 ```
-create_table :offers do |t|
-    t.references :resource, null: false, foreign_key: true
-    t.references :address, null: false, foreign_key: true
-    
-    t.int :square_meters
-    t.int :room_count
-    t.int :floor_number
-    t.int :apartment_number
-    t.boolean :is_furniture
-    t.boolean :is_realtor, default: false
-    t.int :rental_period, default: 1
-    
-    t.decimal :price, precision: 15, scale: 2, null: false
-    
-    t.text :description, unique: true, null: false
-    t.int :sidekiq_status, null: false, default: 1
+t.references :resource, null: false, foreign_key: true
+t.references :address, null: false, foreign_key: true
+t.int :square_meters
+t.int :room_count
+t.int :floor_number
+t.int :apartment_number
+t.boolean :is_furniture
+t.boolean :is_realtor, default: false
+t.int :rental_period, default: 1
+t.decimal :price, precision: 15, scale: 2, null: false
+t.text :description, unique: true, null: false
+t.int :sidekiq_status, null: false, default: 1
+```
+Модель:
+```
+class Offer < ApplicationRecord
+    belongs_to :resource
+    belongs_to :address
 
-    t.timestamps
+    has_many :offer_telephone_numbers
+    has_many :telephone_numbers, through: :offer_telephone_numbers
+
+    has_many :offer_hashtags
+    has_many :hashtags, through: :offer_hashtags
+    
+    has_many :offer_urls
+    has_many :urls, through: :offer_urls
+end
+```
+
+## OfferTelephoneNumber [#]()
+Таблица связей риелторских предложений и телефонных номеров
+> - `offer_id` <br> 
+>   Ссылка на риелторское предложение, к которому будет привязан номер
+> - `telephone_number_id` <br> 
+>   Ссылка на номер телефона, который будет привязан к риелторскому предложению
+
+Генерация модели:
+```
+rails generate model OfferTelephoneNumber \
+    offer:references:index \
+    telephone_number:references:index \
+```
+Create миграция:
+```
+t.references :offer, null: false, foreign_key: true
+t.references :telephone_number, null: false, foreign_key: true
+```
+Модель:
+```
+class OfferTelephoneNumber < ApplicationRecord
+    belongs_to :offer
+    belongs_to :telephone_number
+end
+```
+
+## OfferHashtag [#]()
+Таблица связей риелторских предложений и телефонных номеров
+> - `offer_id` <br> 
+>   Ссылка на риелторское предложение, к которому будет привязан номер
+> - `hashtag_id` <br> 
+>   Ссылка на номер телефона, который будет привязан к риелторскому предложению
+
+Генерация модели:
+```
+rails generate model OfferHashtag \
+    offer:references:index \
+    hashtag:references:index \
+```
+Create миграция:
+```
+t.references :offer, null: false, foreign_key: true
+t.references :hashtag, null: false, foreign_key: true
+```
+Модель:
+```
+class OfferHashtag < ApplicationRecord
+    belongs_to :offer
+    belongs_to :hashtag
+end
+```
+
+## OfferUrl [#]()
+Таблица связей риелторских предложений и телефонных номеров
+> - `offer_id` <br> 
+>   Ссылка на риелторское предложение, к которому будет привязан номер
+> - `url_id` <br> 
+>   Ссылка на номер телефона, который будет привязан к риелторскому предложению
+
+Генерация модели:
+```
+rails generate model OfferUrl \
+    offer:references:index \
+    url:references:index \
+```
+Create миграция:
+```
+t.references :offer, null: false, foreign_key: true
+t.references :url, null: false, foreign_key: true
+```
+Модель:
+```
+class OfferUrl < ApplicationRecord
+    belongs_to :offer
+    belongs_to :url
+end
+```
+
+## OfferImgUrl [#]()
+Таблица связей риелторских предложений и url-адрессов изображений
+> - `offer_id` <br> 
+>   Ссылка на риелторское предложение, к которому будет привязан номер
+> - `url_id` <br> 
+>   Ссылка на номер телефона, который будет привязан к риелторскому предложению
+
+Генерация модели:
+```
+rails generate model OfferUrl \
+    offer:references:index \
+    url:references:index \
+```
+Create миграция:
+```
+t.references :offer, null: false, foreign_key: true
+t.references :url, null: false, foreign_key: true
+```
+Модель:
+```
+class OfferUrl < ApplicationRecord
+    belongs_to :offer
+    belongs_to :url
 end
 ```
