@@ -1,12 +1,15 @@
 Оглавление:
-1. [Offers searcher]()
-1. [Offers parser]()
-1. [Offers parser address]()
+1. [About](https://github.com/denisssss43/realtor_api_wiki#about)
+1. [Model](https://github.com/denisssss43/realtor_api_wiki/blob/master/model.md#model)
+1. [Sidekiq](https://github.com/denisssss43/realtor_api_wiki/blob/master/sidekiq.md#sidekiq)
+    - [Offers searcher](https://github.com/denisssss43/realtor_api_wiki/blob/master/sidekiq.md#OffersSearchWorker-)
+    - [Offers parser](https://github.com/denisssss43/realtor_api_wiki/blob/master/sidekiq.md#OffersParsWorker-)
+    - [Offers parser address](https://github.com/denisssss43/realtor_api_wiki/blob/master/sidekiq.md#OffersParsAddressWorker-)
 
 # SIDEKIQ
 Описание работы воркеров
 
-## OffersSearchWorker [#]()
+## OffersSearchWorker [#](https://github.com/denisssss43/realtor_api_wiki/blob/master/sidekiq.md#sidekiq)
 Поисковик риэлторских предложений.
 
 Обходит все источники и собирает описания предложений. Создает пустую запись в таблице `offers` и заполняет в ней поля:
@@ -18,7 +21,7 @@
 ```
 ```
 
-## OffersParsWorker [#]()
+## OffersParsWorker [#](https://github.com/denisssss43/realtor_api_wiki/blob/master/sidekiq.md#sidekiq)
 Парсер риэлторских предложений.
 
 Обходит все записи в таблице `offers` со статусом `:searcher` и парсит значение поля `description`. Заполняет результатом параса поля: 
@@ -40,7 +43,7 @@
 ```
 ```
 
-## OffersParsAddressWorker [#]()
+## OffersParsAddressWorker [#](https://github.com/denisssss43/realtor_api_wiki/blob/master/sidekiq.md#sidekiq)
 Парсер риэлторских предложений для поиска точного адреса.
 Обходит все записи в таблице со статусом `:parser` и ищет в поле `description` подстроку с похожим на адрес значением. Определение и нормализация адреса осуществляется с помощью `Яндекс.Карт`.
 
