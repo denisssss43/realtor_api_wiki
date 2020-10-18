@@ -2,9 +2,9 @@
 1. [About](https://github.com/denisssss43/realtor_api_wiki#about)
 1. [Model](https://github.com/denisssss43/realtor_api_wiki/blob/master/model.md#model)
 1. [Sidekiq](https://github.com/denisssss43/realtor_api_wiki/blob/master/sidekiq.md#sidekiq)
-    - [Offers searcher](https://github.com/denisssss43/realtor_api_wiki/blob/master/sidekiq.md#OffersSearchWorker-)
-    - [Offers parser](https://github.com/denisssss43/realtor_api_wiki/blob/master/sidekiq.md#OffersParsWorker-)
-    - [Offers parser address](https://github.com/denisssss43/realtor_api_wiki/blob/master/sidekiq.md#OffersParsAddressWorker-)
+    - [OffersSearchWorker](https://github.com/denisssss43/realtor_api_wiki/blob/master/sidekiq.md#OffersSearchWorker-)
+    - [OffersParsWorker](https://github.com/denisssss43/realtor_api_wiki/blob/master/sidekiq.md#OffersParsWorker-)
+    - [OffersParsAddressWorker](https://github.com/denisssss43/realtor_api_wiki/blob/master/sidekiq.md#OffersParsAddressWorker-)
 
 # SIDEKIQ
 Описание работы воркеров
