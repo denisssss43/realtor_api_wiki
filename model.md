@@ -1,16 +1,20 @@
+Оглавление:
+1. [About](https://github.com/denisssss43/realtor_api_wiki#about)
+1. [Model](https://github.com/denisssss43/realtor_api_wiki/blob/master/model.md#model)
+    - [TelephoneNumber](https://github.com/denisssss43/realtor_api_wiki/blob/master/sidekiq.md#TelephoneNumber-)
+    - [Hashtag](https://github.com/denisssss43/realtor_api_wiki/blob/master/sidekiq.md#Hashtag-)
+    - [Url](https://github.com/denisssss43/realtor_api_wiki/blob/master/sidekiq.md#Url-)
+    - [ResourceType](https://github.com/denisssss43/realtor_api_wiki/blob/master/sidekiq.md#ResourceType-)
+    - [Country](https://github.com/denisssss43/realtor_api_wiki/blob/master/sidekiq.md#Country-)
+    - [City](https://github.com/denisssss43/realtor_api_wiki/blob/master/sidekiq.md#City-)
+    - [Addresse](https://github.com/denisssss43/realtor_api_wiki/blob/master/sidekiq.md#Addresse-)
+    - [Resource](https://github.com/denisssss43/realtor_api_wiki/blob/master/sidekiq.md#Resource-)
+    - [Offer](https://github.com/denisssss43/realtor_api_wiki/blob/master/sidekiq.md#Offer-)
+1. [Sidekiq](https://github.com/denisssss43/realtor_api_wiki/blob/master/sidekiq.md#sidekiq)
+
+
 # MODEL
 Описание модели данных
-
-> Оглавление:
-> 1. [TelephoneNumbers (Номера телефонов)]()
-> 1. [Hashtags (Хэштеги)]()
-> 1. [Urls (URL адреса)]()
-> 1. [ResourceTypes (Типы источника)]()
-> 1. [Countries (Страны)]()
-> 1. [Cities (Города)]()
-> 1. [Addresses (Адреса)]()
-> 1. [Resources (Источники)]()
-> 1. [Offers (Предложения)]()
 
 ## TelephoneNumber [#]()
 Таблица номеров телефона. Записи добавляются при парсе предложения с привязкой (связь многи ко многим). Через количество предложений для одного номера будут определяться предложения от риелторских агенств.
