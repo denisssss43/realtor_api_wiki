@@ -1,10 +1,10 @@
+Оглавление:
+1. [Offers searcher]()
+1. [Offers parser]()
+1. [Offers parser address]()
+
 # SIDEKIQ
 Описание работы воркеров
-
-> Оглавление:
-> 1. [Offers searcher]()
-> 1. [Offers parser]()
-> 1. [Offers parser address]()
 
 ## OffersSearchWorker [#]()
 Поисковик риэлторских предложений.
