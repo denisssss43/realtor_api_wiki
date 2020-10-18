@@ -1,3 +1,6 @@
+# SIDEKIQ
+Описание работы воркеров
+
 > Оглавление:
 > 1. [Offers searcher]()
 > 1. [Offers parser]()
