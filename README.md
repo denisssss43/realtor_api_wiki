@@ -6,7 +6,7 @@
 1. [Sidekiq](https://github.com/denisssss43/realtor_api_wiki/blob/master/sidekiq.md#sidekiq)
 
 # ABOUT
-Краткое описание проэкта его установка и запуск.
+Краткое описание [проекта](https://github.com/denisssss43/realtor_api) его установка и запуск.
 
 ## Description
 Данное API предназначено для поиска риэлторских предложений.
