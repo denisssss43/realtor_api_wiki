@@ -1,15 +1,17 @@
+Оглавление:
+1. [About](https://github.com/denisssss43/realtor_api_wiki#about)
+    1. [About](https://github.com/denisssss43/realtor_api_wiki#Description)
+    1. [About](https://github.com/denisssss43/realtor_api_wiki#Install-and-run)
+1. [Model](https://github.com/denisssss43/realtor_api_wiki/blob/master/model.md#model)
+1. [Sidekiq](https://github.com/denisssss43/realtor_api_wiki/blob/master/sidekiq.md#sidekiq)
+
 # ABOUT
 Краткое описание проэкта его установка и запуск.
-
-> Оглавление:
-> 1. [About](https://github.com/denisssss43/realtor_api_wiki#about)
-> 1. [Model](https://github.com/denisssss43/realtor_api_wiki/blob/master/model.md#model)
-> 1. [Sidekiq]()
 
 ## Description
 Данное API предназначено для поиска риэлторских предложений.
 
-## Install and run Установка и запуск
+## Install and run
 Шаг 1. Получение репозитория:
 > `$ git clone https://github.com/denisssss43/realtor_api.git ~/github/realtor_api`
 
