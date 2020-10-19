@@ -14,11 +14,18 @@
     - [OfferHashtag](https://github.com/denisssss43/realtor_api_wiki/blob/master/model.md#Offer-)
     - [OfferUrl](https://github.com/denisssss43/realtor_api_wiki/blob/master/model.md#Offer-)
     - [OfferImgUrl](https://github.com/denisssss43/realtor_api_wiki/blob/master/model.md#OfferImgUrl-)
+1. [API](https://github.com/denisssss43/realtor_api_wiki/blob/master/api.md#api)
 1. [Sidekiq](https://github.com/denisssss43/realtor_api_wiki/blob/master/sidekiq.md#sidekiq)
 
 
 # MODEL
 Описание модели данных
+
+## SEED
+```
+с = Country.create(title: "Россия")
+с.cities.create(title: "Красноярск")
+```
 
 ## TelephoneNumber [#](https://github.com/denisssss43/realtor_api_wiki/blob/master/model.md#)
 Таблица номеров телефона. Записи добавляются при парсе предложения с привязкой (связь многи ко многим). Через количество предложений для одного номера будут определяться предложения от риелторских агенств.
@@ -329,6 +336,9 @@ t.int :sidekiq_status, null: false, default: 1
 class Offer < ApplicationRecord
     belongs_to :resource
     belongs_to :address
+
+    enum rental_period: {month:0, day:1}
+    enum sidekiq_status: {searcher:0, parser:1, completed:2, error:3}
 
     has_many :offer_telephone_numbers
     has_many :telephone_numbers, through: :offer_telephone_numbers
