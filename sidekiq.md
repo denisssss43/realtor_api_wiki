@@ -1,6 +1,7 @@
 Оглавление:
 1. [About](https://github.com/denisssss43/realtor_api_wiki#about)
 1. [Model](https://github.com/denisssss43/realtor_api_wiki/blob/master/model.md#model)
+1. [API](https://github.com/denisssss43/realtor_api_wiki/blob/master/api.md#api)
 1. [Sidekiq](https://github.com/denisssss43/realtor_api_wiki/blob/master/sidekiq.md#sidekiq)
     - [OffersSearchWorker](https://github.com/denisssss43/realtor_api_wiki/blob/master/sidekiq.md#OffersSearchWorker-)
     - [OffersParsWorker](https://github.com/denisssss43/realtor_api_wiki/blob/master/sidekiq.md#OffersParsWorker-)
@@ -50,6 +51,19 @@
 Создает новую запись (*в случае если запись не была добавлена ранее*) в таблице `addresses` и привязывает ее к текущей записи в таблице `offers`.
 
 В случае успешного определения адреса поле `sidekiq_status` заполняется значением `:completed`, в случае если адрес не был определен поле `sidekiq_status` заполняется значением `:error`.
+
+Код:
+```
+```
+
+## OffersSearchAgencyWorker
+Определяет принадлежит ли предложение риелторскому агенству или собственнику.
+
+Определение срабатывает только для предложений со значением поля `sidekiq_status` равным `:completed` и не старше `трех месяцев`(?).
+
+Алгоритм определения заключается в подсчете повторений одного номера для разных предложений. 
+
+Если `для разных адресов` один и тот же номер встречается `более двух раз`, то вероятно что это предложение агенства и поле `is_realtor` принимает значение `true`. 
 
 Код:
 ```
