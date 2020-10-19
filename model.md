@@ -247,7 +247,7 @@ end
 rails generate model Resource \
     resource_type:references:index \
     url:references:index \
-    city:references:index \
+    city:references:index 
 ```
 Create миграция:
 ```
@@ -306,30 +306,30 @@ rails generate model Offer \
     resource:references:index \
     address:references:index \
     'price:decimal{15,2}' \
-    square_meters:int \
-    room_count:int \
-    floor_number:int \
-    apartment_number:int \
+    square_meters:integer \
+    room_count:integer \
+    floor_number:integer \
+    apartment_number:integer \
     is_furniture:boolean \
     is_realtor:boolean \
-    rental_period:int \
+    rental_period:integer \
     description:text \
-    sidekiq_status:int  
+    sidekiq_status:integer  
 ```
 Create миграция:
 ```
 t.references :resource, null: false, foreign_key: true
 t.references :address, null: false, foreign_key: true
-t.int :square_meters
-t.int :room_count
-t.int :floor_number
-t.int :apartment_number
+t.integer :square_meters
+t.integer :room_count
+t.integer :floor_number
+t.integer :apartment_number
 t.boolean :is_furniture
 t.boolean :is_realtor, default: false
-t.int :rental_period, default: 1
+t.integer :rental_period, default: 1
 t.decimal :price, precision: 15, scale: 2, null: false
 t.text :description, unique: true, null: false
-t.int :sidekiq_status, null: false, default: 0
+t.integer :sidekiq_status, null: false, default: 0
 ```
 Модель:
 ```
@@ -391,7 +391,7 @@ end
 ```
 rails generate model OfferHashtag \
     offer:references:index \
-    hashtag:references:index \
+    hashtag:references:index 
 ```
 Create миграция:
 ```
@@ -417,7 +417,7 @@ end
 ```
 rails generate model OfferUrl \
     offer:references:index \
-    url:references:index \
+    url:references:index 
 ```
 Create миграция:
 ```
@@ -443,7 +443,7 @@ end
 ```
 rails generate model OfferImgUrl \
     offer:references:index \
-    img_url:references:index \
+    img_url:references:index 
 ```
 Create миграция:
 ```
