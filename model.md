@@ -329,7 +329,7 @@ t.boolean :is_realtor, default: false
 t.int :rental_period, default: 1
 t.decimal :price, precision: 15, scale: 2, null: false
 t.text :description, unique: true, null: false
-t.int :sidekiq_status, null: false, default: 1
+t.int :sidekiq_status, null: false, default: 0
 ```
 Модель:
 ```
